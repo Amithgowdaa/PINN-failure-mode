@@ -397,8 +397,8 @@ MIT License
 ```bibtex
 @software{pinn_failure_modes,
   title={PINN Failure Modes},
-  author={Your Name},
+  author={Amith Gowda R},
   year={2026},
-  url={https://github.com/yourusername/pinn-failure-mode}
+  url={https://github.com/Amithgowdaa/pinn-failure-mode}
 }
 ```

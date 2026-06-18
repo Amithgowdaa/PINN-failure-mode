@@ -42,14 +42,7 @@ def burgers_residual(
 
 
 class BurgersEquation:
-    """
-    BUG FIXED: original file only defined a bare function burgers_residual().
-    StandardLoss calls equation.pde_loss(...) — a method on a class.
-    Wrapping here makes it compatible with StandardLoss without touching that file.
-
-    Args:
-        nu : viscosity coefficient. Raissi et al. 2019 uses nu = 0.01/pi
-    """
+  
 
     def __init__(self, nu: float = 0.01 / 3.141592653589793):
         self.nu = nu

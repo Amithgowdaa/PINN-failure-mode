@@ -7,20 +7,6 @@ def load_training_data(
     N_bc:  int = 100,
     N_pde: int = 10000,
 ):
-    """
-    Samples collocation points for Burgers' equation on:
-        x ∈ [-1, 1],  t ∈ [0, 1]
-
-    Returns a dict (not a tuple) so callers access by name, not position.
-    Returning a 6-tuple is fragile — if you add a new condition later, every
-    caller that unpacks positionally silently gets the wrong tensor.
-
-    BUG FIXED: original sampled t_bc as one block of N_bc points, then
-    concatenated x_bc as [left_half | right_half]. The pairing was implicit
-    and ambiguous. Now t_bc is sampled in two explicit halves to match x_bc.
-    Functionally equivalent for uniform sampling, but now the structure is
-    explicit and safe to extend (e.g. non-uniform boundary schedules).
-    """
 
     # --- Initial condition:  t = 0,  x ∈ [-1, 1] ---
     x_ic = torch.FloatTensor(N_ic, 1).uniform_(-1, 1)

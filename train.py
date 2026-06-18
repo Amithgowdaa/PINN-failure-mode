@@ -11,24 +11,7 @@ from data.burgers_data import load_training_data
 
 
 def train(config: dict) -> dict:
-    """
-    Baseline PINN training loop for Burgers' equation.
-
-    Args:
-        config: dict with keys —
-            layers      : e.g. [2, 64, 64, 64, 1]
-            activation  : "tanh" | "swish" | "sine" | ...
-            nu          : viscosity (default 0.01/pi)
-            N_ic, N_bc, N_pde : collocation counts
-            n_epochs    : training iterations
-            lr          : Adam learning rate
-            lambda_ic, lambda_bc, lambda_pde : loss weights
-            log_every   : print interval
-            save_dir    : where to write history JSON
-
-    Returns:
-        history dict with lists: "ic", "bc", "pde", "total"
-    """
+    
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Device: {device}")

@@ -11,11 +11,7 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 
 def plot_loss_curves(history: dict, save_path: str = None):
-    """
-    Plots IC, BC, PDE, and Total loss on a log scale.
-    Always plot these separately — total loss hiding a bad PDE component
-    is the most common failure-mode diagnostic miss.
-    """
+   
     fig, ax = plt.subplots(figsize=(9, 4))
 
     for key, color in zip(
@@ -57,14 +53,7 @@ def plot_residual_heatmap(
     device: str = "cpu",
     save_path: str = None,
 ):
-    """
-    Plots |residual(x,t)| over the full domain as a heatmap.
-
-    This is non-negotiable for failure-mode analysis. A low total-loss
-    training run can still have large localised residuals near the shock
-    (t ≈ 1/pi for nu=0.01/pi). The heatmap reveals WHERE the PINN fails,
-    which the scalar loss completely hides.
-    """
+   
     model.eval()
 
     x_vals = torch.linspace(-1, 1,  nx, device=device).view(-1, 1)
@@ -113,12 +102,7 @@ def plot_prediction_vs_truth(
     device: str = "cpu",
     save_path: str = None,
 ):
-    """
-    Side-by-side: PINN prediction | Reference solution | Pointwise error.
-
-    ground_truth must be the dict from load_ground_truth():
-        keys: "x" (256,), "t" (100,), "u" (256, 100)
-    """
+    
     model.eval()
 
     x_np = ground_truth["x"]   # (256,)

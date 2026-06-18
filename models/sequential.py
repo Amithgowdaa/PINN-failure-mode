@@ -4,17 +4,7 @@ from models.activation import ACTIVATIONS
 
 
 class MLP(nn.Module):
-    """
-    Fully-connected PINN backbone.
-
-    Input : (x, t) concatenated  →  shape (N, input_dim)
-    Output: u                    →  shape (N, 1)
-
-    Args:
-        layers     : list of ints, e.g. [2, 64, 64, 64, 1]
-                     layers[0] MUST equal the number of input coordinates.
-        activation : key from ACTIVATIONS dict (default "tanh")
-    """
+    
 
     def __init__(self, layers: list[int], activation: str = "tanh"):
         super().__init__()
@@ -37,9 +27,6 @@ class MLP(nn.Module):
         self.net = nn.Sequential(*modules)
 
     def forward(self, x: torch.Tensor, t: torch.Tensor) -> torch.Tensor:
-        """
-        BUG FIXED: original forward(self, x) silently dropped t entirely.
-        x, t must each be shape (N, 1).  Concatenated before passing to net.
-        """
+       
         xt = torch.cat([x, t], dim=-1)   # (N, 2)
         return self.net(xt)               # (N, 1)

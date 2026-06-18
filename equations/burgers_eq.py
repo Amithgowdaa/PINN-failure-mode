@@ -7,14 +7,7 @@ def burgers_residual(
     t: torch.Tensor,
     nu: float
 ) -> torch.Tensor:
-    """
-    Computes the PDE residual:  u_t + u*u_x - nu*u_xx
-
-    BUG FIXED: original called x.requires_grad_(True) which mutates the
-    tensor IN-PLACE. When the same batch tensor is reused across equations
-    or loss terms, this corrupts the computation graph silently.
-    Use .clone().requires_grad_(True) instead.
-    """
+   
     x = x.clone().requires_grad_(True)   # (N, 1)
     t = t.clone().requires_grad_(True)   # (N, 1)
 
